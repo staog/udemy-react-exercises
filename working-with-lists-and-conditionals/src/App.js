@@ -33,6 +33,10 @@ class App extends Component {
     })
   }
   
+  togglePersonsHandler = () => {
+    
+  }
+  
   render() {
     const style = {
       backgroundColor: 'white',
