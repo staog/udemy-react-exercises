@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -14,25 +13,30 @@ class App extends Component {
     showPersons: false
   };
 
-  switchNameHandler = (newName) => {
-    // DON'T USE THIS: this.state.persons[0].name = "Vojov mali"
-    this.setState({
-      persons: [
-        { name: newName, age: 38 },
-        { name: "Petra", age: 32 },
-        { name: "Milica", age: 6 }
-      ]
-    })
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+
+    person.name = event.target.value;
+
+    consts persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({persons: persons});
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: newName, age: 38 },
-        { name: event.target.value, age: 32 },
-        { name: "Milica", age: 6 }
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons: persons});
   }
   
   togglePersonsHandler = () => {
@@ -54,10 +58,13 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map(person => {
+          {this.state.persons.map((person, index) => {
             return <Person 
+              click={this.deletePersonHandler(index)}
               name={person.name} 
-              age={person.age} />
+              age={person.age}
+              key={person.id}
+              changed={(event) => this.nameChangedHandler(event, person.id)} />
           })}
         </div>
       )
@@ -75,4 +82,5 @@ class App extends Component {
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'This is what jsx gets compiled to'));
 }
+
 export default App;
