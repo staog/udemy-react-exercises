@@ -1,3 +1,4 @@
+
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -9,7 +10,8 @@ class App extends Component {
       { name: "Petra", age: 32 },
       { name: "Milica", age: 7 }
     ],
-    otherState: "Some value"
+    otherState: "Some value",
+    showPersons: false
   };
 
   switchNameHandler = (newName) => {
@@ -34,7 +36,8 @@ class App extends Component {
   }
   
   togglePersonsHandler = () => {
-    
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow})
   }
   
   render() {
@@ -52,23 +55,25 @@ class App extends Component {
         <p>This really works!</p>
         <button
           style={style} 
-          onClick={this.switchNameHandler.bind(this, "Mile")}>Switch Name</button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age} />
-        <Person 
-          name={this.sState.persons[1].name} 
-          age={this.state.persons[1].age} 
-          click={this.switchNameHandler.bind(this, "Miks!")} />
-          changed={this.nameChangedHandler}
-        <Person
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}>My hobbies: Drawing</Person>
+          onClick={this.togglePersonsHandler()}>Toggle Persons</button>
+        { 
+          this.state.showPersons ? 
+            <div >
+              <Person 
+                name={this.state.persons[0].name} 
+                age={this.state.persons[0].age} />
+              <Person 
+                name={this.sState.persons[1].name} 
+                age={this.state.persons[1].age} 
+                click={this.switchNameHandler.bind(this, "Miks!")} />
+                changed={this.nameChangedHandler}
+              <Person
+                name={this.state.persons[2].name} 
+                age={this.state.persons[2].age}>My hobbies: Drawing</Person>
+            </div> : null
+        }
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'This is what jsx gets compiled to'));
 }
-
 export default App;
-
-
