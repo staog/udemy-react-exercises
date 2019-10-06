@@ -23,8 +23,6 @@ class App extends Component {
       ...this.state.persons[personIndex]
     }
 
-    // const person = Object.assign({}, this.state.persons[personIndex]);
-
     person.name = event.target.value;
 
     consts persons = [...this.state.persons];
@@ -101,7 +99,6 @@ class App extends Component {
         </div>
       </StyleRoot>
     );
-    // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'This is what jsx gets compiled to'));
 }
 
 export default Radium(App);
