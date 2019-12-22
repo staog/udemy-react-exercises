@@ -22,8 +22,6 @@ class App extends Component {
       ...this.state.persons[personIndex]
     }
 
-    // const person = Object.assign({}, this.state.persons[personIndex]);
-
     person.name = event.target.value;
 
     consts persons = [...this.state.persons];
@@ -33,7 +31,6 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    // const persons = this.state.persons.slice();
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
     this.setState({persons: persons});
