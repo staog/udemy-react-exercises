@@ -11,6 +11,7 @@ var app = (
   <div>
     <Person name="Milan" age="38" />
     <Person name="Petra" age="32" />
+    <Person name="Milica" age="7" />
   </div>
 )
 
